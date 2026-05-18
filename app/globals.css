@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-navy antialiased;
+  font-feature-settings: "ss01", "cv11";
+}
+
+@layer base {
+  ::selection {
+    @apply bg-electric text-white;
+  }
+}
+
+@layer components {
+  .container-tight {
+    @apply mx-auto w-full max-w-[1280px] px-5 lg:px-8;
+  }
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.2em] text-electric;
+  }
+  .eyebrow-light {
+    @apply text-xs font-medium uppercase tracking-[0.2em] text-sky;
+  }
+  .display-italic {
+    @apply font-serif italic font-medium;
+  }
+  .grain {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+}
