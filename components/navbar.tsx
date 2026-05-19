@@ -20,8 +20,6 @@ export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const isHome = pathname === "/";
-  const transparent = isHome && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -33,30 +31,20 @@ export function Navbar() {
   useEffect(() => setOpen(false), [pathname]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        transparent
-          ? "bg-transparent"
-          : "border-b border-navy/5 bg-white/95 backdrop-blur"
-      )}
-    >
-      <div className="container-tight flex h-16 items-center justify-between lg:h-20">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 lg:px-8 lg:pt-6">
+      <div
+        className={cn(
+          "mx-auto flex max-w-[1280px] items-center justify-between rounded-full bg-white/95 px-4 py-3 backdrop-blur transition-shadow duration-300 lg:px-6 lg:py-3.5",
+          scrolled
+            ? "shadow-[0_8px_32px_-12px_rgba(4,9,47,0.18)]"
+            : "shadow-[0_4px_24px_-16px_rgba(4,9,47,0.18)]"
+        )}
+      >
         <Link href="/" className="flex items-center gap-2">
-          <span
-            className={cn(
-              "grid h-9 w-9 place-items-center rounded-xl bg-electric text-white text-base font-bold",
-              transparent && "ring-1 ring-white/30"
-            )}
-          >
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-electric text-base font-bold text-white">
             Y
           </span>
-          <span
-            className={cn(
-              "text-base font-semibold tracking-tight",
-              transparent ? "text-white" : "text-navy"
-            )}
-          >
+          <span className="text-base font-semibold text-navy">
             Yarnel<span className="text-electric">Sourcing</span>
           </span>
         </Link>
@@ -73,20 +61,14 @@ export function Navbar() {
                 href={link.href}
                 className={cn(
                   "relative px-4 py-2 text-sm font-medium transition-colors",
-                  transparent
-                    ? "text-white/85 hover:text-white"
-                    : "text-navy/75 hover:text-navy",
-                  active && (transparent ? "text-white" : "text-navy")
+                  active ? "text-navy" : "text-navy/65 hover:text-navy"
                 )}
               >
                 {link.label}
                 {active && (
                   <motion.span
                     layoutId="nav-underline"
-                    className={cn(
-                      "absolute inset-x-3 -bottom-0.5 h-px",
-                      transparent ? "bg-sky" : "bg-electric"
-                    )}
+                    className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-electric"
                   />
                 )}
               </Link>
@@ -103,10 +85,7 @@ export function Navbar() {
         <button
           aria-label="Ouvrir le menu"
           onClick={() => setOpen((v) => !v)}
-          className={cn(
-            "grid h-10 w-10 place-items-center rounded-xl lg:hidden",
-            transparent ? "text-white" : "text-navy"
-          )}
+          className="grid h-10 w-10 place-items-center rounded-full text-navy lg:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -119,9 +98,9 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-navy/5 bg-white shadow-card lg:hidden"
+            className="mx-auto mt-3 max-w-[1280px] rounded-3xl bg-white p-4 shadow-card lg:hidden"
           >
-            <div className="container-tight flex flex-col gap-1 py-4">
+            <div className="flex flex-col gap-1">
               {links.map((link) => {
                 const active =
                   link.href === "/"

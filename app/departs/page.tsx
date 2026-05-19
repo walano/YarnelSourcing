@@ -13,9 +13,9 @@ export default function DeparturesPage() {
       <section className="border-b border-navy/10 bg-navy text-white">
         <div className="container-tight py-24 lg:py-28">
           <p className="eyebrow-light">Marketplace kilos</p>
-          <h1 className="mt-4 max-w-3xl text-display-lg font-extrabold tracking-tight">
+          <h1 className="mt-4 max-w-3xl text-display-lg font-extrabold">
             Réservez sur les{" "}
-            <span className="display-italic text-sky">prochains départs</span>{" "}
+            <span className="text-sky">prochains départs</span>{" "}
             groupés.
           </h1>
           <p className="mt-5 max-w-xl text-base text-white/75">

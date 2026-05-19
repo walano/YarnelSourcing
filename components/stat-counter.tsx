@@ -26,17 +26,15 @@ export function StatCounter({ value, suffix = "", label, duration = 1.6 }: Props
   }, [inView, value, duration]);
 
   return (
-    <div>
+    <div className="text-center">
       <span
         ref={ref}
-        className="block text-display-md font-extrabold tracking-tight text-white"
+        className="block text-display-md font-extrabold text-white"
       >
         {display.toLocaleString("fr-FR")}
         <span className="text-sky">{suffix}</span>
       </span>
-      <span className="mt-2 block text-xs uppercase tracking-[0.18em] text-white/60">
-        {label}
-      </span>
+      <span className="mt-2 block text-sm text-white/65">{label}</span>
     </div>
   );
 }

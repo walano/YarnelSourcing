@@ -42,9 +42,9 @@ export default function ContactPage() {
       <section className="border-b border-navy/10 bg-navy text-white">
         <div className="container-tight py-24 lg:py-28">
           <p className="eyebrow-light">Contact</p>
-          <h1 className="mt-4 max-w-3xl text-display-lg font-extrabold tracking-tight">
+          <h1 className="mt-4 max-w-3xl text-display-lg font-extrabold">
             Parlons de votre{" "}
-            <span className="display-italic text-sky">prochain envoi</span>.
+            <span className="text-sky">prochain envoi</span>.
           </h1>
           <p className="mt-5 max-w-xl text-base text-white/75">
             Notre équipe répond sous 4h ouvrées. Pour une réponse instantanée,
@@ -72,7 +72,7 @@ export default function ContactPage() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
           <Reveal>
             <p className="eyebrow">Formulaire</p>
-            <h2 className="mt-3 text-display-md font-extrabold tracking-tight text-navy">
+            <h2 className="mt-3 text-display-md font-extrabold text-navy">
               Écrivez-nous
             </h2>
             <p className="mt-3 max-w-lg text-sm text-navy/65">
@@ -117,7 +117,7 @@ export default function ContactPage() {
                         <p className="text-sm font-semibold">
                           {o.city}
                           {o.primary && (
-                            <span className="ml-2 rounded-full bg-electric px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-white">
+                            <span className="ml-2 rounded-full bg-electric px-2 py-0.5 text-[10px] uppercase text-white">
                               Siège
                             </span>
                           )}

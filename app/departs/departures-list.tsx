@@ -43,7 +43,7 @@ export function DeparturesList() {
       <div className="flex flex-col gap-4 border-b border-navy/10 pb-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-2">
           <Filter className="h-4 w-4 text-navy/55" />
-          <span className="text-xs uppercase tracking-[0.18em] text-navy/55">
+          <span className="text-xs uppercase text-navy/55">
             Filtrer
           </span>
           <div className="ml-2 flex gap-1.5">
@@ -65,7 +65,7 @@ export function DeparturesList() {
         </div>
 
         <div className="flex items-center gap-2 text-xs">
-          <span className="uppercase tracking-[0.18em] text-navy/55">
+          <span className="uppercase text-navy/55">
             Trier par
           </span>
           <select
@@ -115,7 +115,7 @@ export function DeparturesList() {
                         Réf. {d.reference}
                       </span>
                     </div>
-                    <p className="mt-2 text-lg font-bold tracking-tight text-navy">
+                    <p className="mt-2 text-lg font-bold text-navy">
                       <span className="text-navy/55">{d.origin}</span> →{" "}
                       <span className="text-electric">{d.destination}</span>
                     </p>
@@ -159,7 +159,7 @@ export function DeparturesList() {
                 {/* Action */}
                 <div className="flex flex-col items-stretch gap-2 lg:items-end">
                   {tight && (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-electric">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase text-electric">
                       <CircleCheck className="h-3.5 w-3.5" />
                       Bientôt complet
                     </span>
@@ -180,7 +180,7 @@ export function DeparturesList() {
       <div className="mt-14 grid gap-6 rounded-2xl border border-navy/10 bg-navy p-8 text-white lg:grid-cols-[1.6fr_1fr] lg:items-center lg:p-10">
         <div>
           <p className="eyebrow-light">Bon à savoir</p>
-          <h3 className="mt-3 text-2xl font-bold tracking-tight">
+          <h3 className="mt-3 text-2xl font-bold">
             Un départ chaque semaine, sur tous les couloirs majeurs.
           </h3>
           <p className="mt-3 max-w-xl text-sm text-white/75">

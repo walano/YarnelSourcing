@@ -19,7 +19,8 @@ const buttonVariants = cva(
         outlineDark:
           "border border-navy/20 bg-transparent text-navy hover:border-electric hover:text-electric",
         ghost: "text-navy hover:bg-navy/5",
-        sky: "bg-sky text-navy hover:bg-sky/90"
+        sky: "bg-sky text-navy hover:bg-sky/90",
+        white: "bg-white text-navy shadow-[0_8px_24px_-12px_rgba(4,9,47,0.25)] hover:bg-soft active:translate-y-px"
       },
       size: {
         default: "h-11 px-6",

@@ -26,16 +26,30 @@ body {
     @apply mx-auto w-full max-w-[1280px] px-5 lg:px-8;
   }
   .eyebrow {
-    @apply text-xs font-medium uppercase tracking-[0.2em] text-electric;
+    @apply text-xs font-semibold uppercase text-electric;
+  }
+  .eyebrow-muted {
+    @apply text-xs font-semibold uppercase text-navy/50;
   }
   .eyebrow-light {
-    @apply text-xs font-medium uppercase tracking-[0.2em] text-sky;
+    @apply text-xs font-semibold uppercase text-sky;
   }
-  .display-italic {
-    @apply font-serif italic font-medium;
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-navy/15 bg-white px-3.5 py-1.5 text-xs font-medium text-navy shadow-[0_4px_18px_-8px_rgba(4,9,47,0.18)] backdrop-blur;
+  }
+  .chip-dark {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-navy px-3.5 py-1.5 text-xs font-medium text-white;
   }
   .grain {
     background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
     background-size: 3px 3px;
+  }
+  .brand-fade {
+    background: linear-gradient(180deg, rgba(4, 9, 47, 0.12) 0%, rgba(4, 9, 47, 0) 92%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    line-height: 0.85;
   }
 }

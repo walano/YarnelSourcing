@@ -31,9 +31,9 @@ export default function BlogPage() {
       <section className="border-b border-navy/10 bg-navy text-white">
         <div className="container-tight py-24 lg:py-28">
           <p className="eyebrow-light">Ressources</p>
-          <h1 className="mt-4 max-w-3xl text-display-lg font-extrabold tracking-tight">
+          <h1 className="mt-4 max-w-3xl text-display-lg font-extrabold">
             Apprendre à{" "}
-            <span className="display-italic text-sky">importer mieux</span>,
+            <span className="text-sky">importer mieux</span>,
             chaque semaine.
           </h1>
           <p className="mt-5 max-w-xl text-base text-white/75">
@@ -67,7 +67,7 @@ export default function BlogPage() {
                   {formatDateFR(feature.date)} · {feature.readMinutes} min de lecture
                 </span>
               </div>
-              <h2 className="text-display-md font-extrabold leading-tight tracking-tight text-navy">
+              <h2 className="text-display-md font-extrabold leading-tight text-navy">
                 {feature.title}
               </h2>
               <p className="text-base leading-relaxed text-navy/70">
@@ -105,7 +105,7 @@ export default function BlogPage() {
                       {a.readMinutes} min
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold leading-tight tracking-tight text-navy">
+                  <h3 className="text-lg font-bold leading-tight text-navy">
                     {a.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-navy/65">
@@ -130,7 +130,7 @@ export default function BlogPage() {
           <div className="grid gap-6 rounded-2xl bg-electric p-8 text-white lg:grid-cols-[1.5fr_1fr] lg:items-center lg:p-12">
             <div>
               <p className="eyebrow-light !text-white/70">Lettre mensuelle</p>
-              <h3 className="mt-3 text-display-md font-extrabold leading-tight tracking-tight">
+              <h3 className="mt-3 text-display-md font-extrabold leading-tight">
                 Recevez nos analyses de marché et nos guides pratiques.
               </h3>
               <p className="mt-3 max-w-lg text-sm text-white/85">

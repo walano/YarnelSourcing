@@ -113,7 +113,7 @@ export function QuoteWizard() {
                 <div>
                   <p
                     className={cn(
-                      "text-sm font-semibold tracking-tight",
+                      "text-sm font-semibold",
                       active ? "text-navy" : "text-navy/70"
                     )}
                   >
@@ -151,7 +151,7 @@ export function QuoteWizard() {
               transition={{ duration: 0.25 }}
             >
               <p className="eyebrow">Étape 1</p>
-              <h2 className="mt-3 text-2xl font-bold tracking-tight text-navy lg:text-3xl">
+              <h2 className="mt-3 text-2xl font-bold text-navy lg:text-3xl">
                 Décrivez votre marchandise
               </h2>
               <p className="mt-2 text-sm text-navy/65">
@@ -227,7 +227,7 @@ export function QuoteWizard() {
               transition={{ duration: 0.25 }}
             >
               <p className="eyebrow">Étape 2</p>
-              <h2 className="mt-3 text-2xl font-bold tracking-tight text-navy lg:text-3xl">
+              <h2 className="mt-3 text-2xl font-bold text-navy lg:text-3xl">
                 Où acheminer votre colis ?
               </h2>
               <p className="mt-2 text-sm text-navy/65">
@@ -302,7 +302,7 @@ export function QuoteWizard() {
               transition={{ duration: 0.3 }}
             >
               <p className="eyebrow">Votre devis</p>
-              <h2 className="mt-3 text-2xl font-bold tracking-tight text-navy lg:text-3xl">
+              <h2 className="mt-3 text-2xl font-bold text-navy lg:text-3xl">
                 {weightNum} kg vers{" "}
                 <span className="text-electric">{destination}</span>
               </h2>
@@ -419,7 +419,7 @@ function ResultCard({
       <Icon className={cn("h-5 w-5", highlight ? "text-sky" : "text-electric")} />
       <p
         className={cn(
-          "mt-4 text-[11px] uppercase tracking-[0.18em]",
+          "mt-4 text-[11px] uppercase",
           highlight ? "text-white/70" : "text-navy/55"
         )}
       >
@@ -427,7 +427,7 @@ function ResultCard({
       </p>
       <p
         className={cn(
-          "mt-1 text-2xl font-extrabold tracking-tight",
+          "mt-1 text-2xl font-extrabold",
           highlight ? "text-white" : "text-navy"
         )}
       >

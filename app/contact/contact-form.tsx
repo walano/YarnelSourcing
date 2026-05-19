@@ -36,7 +36,7 @@ export function ContactForm() {
             className="rounded-2xl border border-electric/30 bg-electric/5 p-8"
           >
             <CheckCircle2 className="h-10 w-10 text-electric" />
-            <h3 className="mt-4 text-2xl font-bold tracking-tight text-navy">
+            <h3 className="mt-4 text-2xl font-bold text-navy">
               Message bien reçu
             </h3>
             <p className="mt-2 max-w-md text-sm text-navy/70">
