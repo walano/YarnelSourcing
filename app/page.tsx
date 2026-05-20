@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Quote, Star } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { StatCounter } from "@/components/stat-counter";
@@ -38,9 +38,9 @@ export default function HomePage() {
         <div className="container-tight relative">
           {/* Headline */}
           <Reveal>
-            <h1 className="mx-auto mt-[35vh] max-w-4xl text-center font-extrabold leading-[0.95] text-white text-[clamp(1.85rem,5vw,4.25rem)] lg:mt-[25vh] -tracking-wider text-5xl font-bold">
-              Le fret malin entre
-              <br />
+            <h1 className="mx-auto mt-[35vh] max-w-4xl text-balance text-center font-extrabold leading-[0.95] text-white text-[clamp(1.85rem,5vw,4.25rem)] -tracking-wider lg:mt-[25vh]">
+              Le fret malin entre{" "}
+              <br className="hidden sm:block" />
               la Chine et l'Afrique.
             </h1>
           </Reveal>
@@ -49,9 +49,7 @@ export default function HomePage() {
           <Reveal delay={0.2}>
             <div className="mt-16 flex flex-wrap items-center justify-center gap-3 lg:mt-10 -translate-y-10 sm:translate-y-0">
               <Button asChild size="lg" variant="white">
-                <Link href="/devis">
-                  Obtenir un devis <ArrowRight className="h-4 w-4" />
-                </Link>
+                <Link href="/devis">Obtenir un devis</Link>
               </Button>
               <Button asChild size="lg" variant="secondary">
                 <Link href="/departs">Voir les départs</Link>
@@ -77,7 +75,7 @@ export default function HomePage() {
                 href="/departs"
                 className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-electric hover:gap-2"
               >
-                Réserver des kilos <ArrowUpRight className="h-4 w-4" />
+                Réserver des kilos
               </Link>
             </div>
           </Reveal>
@@ -93,8 +91,7 @@ export default function HomePage() {
             <Reveal>
               <h2 className="text-display-lg font-extrabold leading-[1.02] text-navy -tracking-wider text-2xl font-bold">
                 Une logistique{" "}
-                <span className="text-electric">précise</span>, négociée pour
-                les marchés africains.
+                <span className="text-electric">précise</span>, négociée pour les marchés africains.
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-navy/70 lg:text-lg">
                 Depuis nos bureaux de Guangzhou et Yiwu, nos agents
@@ -177,7 +174,7 @@ export default function HomePage() {
                       href="/devis"
                       className="mt-5 inline-flex items-center gap-1 rounded-full bg-electric px-4 py-2 text-xs font-semibold uppercase text-white hover:bg-sky hover:text-navy"
                     >
-                      Voir les services <ArrowUpRight className="h-3.5 w-3.5" />
+                      Voir les services
                     </Link>
                   </div>
                 </div>
@@ -209,7 +206,7 @@ export default function HomePage() {
                       href="/contact"
                       className="mt-5 inline-flex items-center gap-1 rounded-full bg-electric px-4 py-2 text-xs font-semibold uppercase text-white hover:bg-sky hover:text-navy"
                     >
-                      Parler à un agent <ArrowUpRight className="h-3.5 w-3.5" />
+                      Parler à un agent
                     </Link>
                   </div>
                 </div>
@@ -287,7 +284,7 @@ export default function HomePage() {
             {testimonials.map((t, i) => (
               <Reveal as="article" key={t.name} delay={i * 0.1}>
                 <div className="flex h-full flex-col gap-5 rounded-2xl border border-navy/10 bg-soft p-7 transition-all hover:-translate-y-1 hover:border-electric/30 hover:bg-white hover:shadow-card">
-                  <Quote className="h-7 w-7 text-electric" />
+                  <i className="fi fi-rs-quote-right text-2xl leading-none text-electric" />
                   <p className="text-base leading-relaxed text-navy/85">
                     « {t.quote} »
                   </p>
@@ -331,7 +328,7 @@ export default function HomePage() {
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
               <Button asChild size="lg" variant="secondary">
                 <Link href="/devis">
-                  Lancer mon devis <ArrowRight className="h-4 w-4" />
+                  Lancer mon devis
                 </Link>
               </Button>
               <Button asChild size="lg" variant="white" className="hover:bg-sky">

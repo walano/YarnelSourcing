@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
   CalendarClock,
   CircleCheck,
   Filter,
@@ -166,7 +165,7 @@ export function DeparturesList() {
                   )}
                   <Button asChild>
                     <Link href="/devis">
-                      Réserver des kilos <ArrowRight className="h-4 w-4" />
+                      Réserver des kilos
                     </Link>
                   </Button>
                 </div>
@@ -180,7 +179,7 @@ export function DeparturesList() {
       <div className="mt-14 grid gap-6 rounded-2xl border border-navy/10 bg-navy p-8 text-white lg:grid-cols-[1.6fr_1fr] lg:items-center lg:p-10">
         <div>
           <p className="eyebrow-light">Bon à savoir</p>
-          <h3 className="mt-3 text-2xl font-bold">
+          <h3 className="mt-3 text-2xl font-bold -tracking-wider ">
             Un départ chaque semaine, sur tous les couloirs majeurs.
           </h3>
           <p className="mt-3 max-w-xl text-sm text-white/75">
@@ -191,10 +190,10 @@ export function DeparturesList() {
         <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
           <Button asChild variant="sky">
             <Link href="/devis">
-              Calculer mon tarif <ArrowRight className="h-4 w-4" />
+              Calculer mon tarif
             </Link>
           </Button>
-          <Button asChild variant="outline">
+          <Button asChild variant="white" className="hover:white">
             <Link href="/contact">Parler à un agent</Link>
           </Button>
         </div>

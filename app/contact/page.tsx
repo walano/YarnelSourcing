@@ -4,6 +4,7 @@ import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
+import { PageHeader } from "@/components/page-header";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -39,39 +40,33 @@ const offices = [
 export default function ContactPage() {
   return (
     <div className="bg-white">
-      <section className="border-b border-navy/10 bg-navy text-white">
-        <div className="container-tight py-24 lg:py-28">
-          <p className="eyebrow-light">Contact</p>
-          <h1 className="mt-4 max-w-3xl text-display-lg font-extrabold">
-            Parlons de votre{" "}
-            <span className="text-sky">prochain envoi</span>.
-          </h1>
-          <p className="mt-5 max-w-xl text-base text-white/75">
-            Notre équipe répond sous 4h ouvrées. Pour une réponse instantanée,
-            écrivez-nous sur WhatsApp.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg" variant="sky">
-              <a
-                href="https://wa.me/8619582480671"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <MessageCircle className="h-4 w-4" /> WhatsApp
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/devis">Demander un devis</Link>
-            </Button>
-          </div>
+      <PageHeader
+        title={
+          <>
+            Parlons de votre <span className="text-sky">prochain envoi</span>.
+          </>
+        }
+        description="Notre équipe répond sous 4h ouvrées. Pour une réponse instantanée, écrivez-nous sur WhatsApp."
+      >
+        <div className="flex flex-wrap gap-3">
+          <Button asChild size="lg" variant="sky">
+            <a
+              href="https://wa.me/8619582480671"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <MessageCircle className="h-4 w-4" /> WhatsApp
+            </a>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <Link href="/devis">Demander un devis</Link>
+          </Button>
         </div>
-      </section>
+      </PageHeader>
 
       <section className="container-tight py-16 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
           <Reveal>
-            <p className="eyebrow">Formulaire</p>
             <h2 className="mt-3 text-display-md font-extrabold text-navy">
               Écrivez-nous
             </h2>

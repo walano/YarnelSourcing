@@ -189,18 +189,40 @@ export const articles: Article[] = [
 ];
 
 export type Urgency = "standard" | "express" | "premium";
+export type ShippingMode = "Maritime" | "Aérien";
+export type GoodsType = "ordinaire" | "batterie" | "liquide" | "poudre";
+
+export const goodsOptions: { value: GoodsType; label: string }[] = [
+  { value: "ordinaire", label: "Ordinaire" },
+  { value: "batterie", label: "Batterie" },
+  { value: "liquide", label: "Liquide" },
+  { value: "poudre", label: "Poudre" }
+];
+
+// Insurance: 4000 FCFA per kg (FCFA = 600 per USD → see lib/currency).
+export const INSURANCE_FCFA_PER_KG = 4000;
+export const INSURANCE_USD_PER_KG = INSURANCE_FCFA_PER_KG / 600;
+// China sourcing support add-on (before transit), flat fee in USD.
+export const ACCOMPAGNEMENT_USD = 150;
 
 export type QuoteResult = {
-  price: number;
+  price: number; // total in USD
+  freight: number;
+  insuranceFee: number;
+  accompagnementFee: number;
   delayLabel: string;
   delayDays: number;
   nextDeparture: { date: string; reference: string; mode: string };
   pricePerKg: number;
   urgencyLabel: string;
+  shippingMode: ShippingMode;
 };
 
 const destinationMultipliers: Record<string, number> = {
   "Libreville (Gabon)": 1.0,
+  "Port-Gentil (Gabon)": 1.04,
+  "Oyem (Gabon)": 1.08,
+  "Franceville (Gabon)": 1.08,
   Douala: 1.05,
   Yaoundé: 1.08,
   Abidjan: 1.1,
@@ -220,44 +242,71 @@ const destinationMultipliers: Record<string, number> = {
 
 const urgencyConfig: Record<
   Urgency,
-  { base: number; days: number; label: string; mode: "Aérien" | "Maritime" }
+  { base: number; days: number; label: string; mode: ShippingMode }
 > = {
-  standard: { base: 4.5, days: 40, label: "Standard maritime", mode: "Maritime" },
-  express: { base: 9.8, days: 15, label: "Express mixte", mode: "Maritime" },
-  premium: { base: 14.5, days: 6, label: "Premium aérien", mode: "Aérien" }
+  standard: { base: 4.5, days: 15, label: "Standard", mode: "Maritime" },
+  express: { base: 9.8, days: 5, label: "Express mix", mode: "Aérien" },
+  premium: { base: 14.5, days: 3, label: "Premium aérien", mode: "Aérien" }
+};
+
+// Goods category surcharge (dangerous / sensitive goods cost more to ship).
+const goodsMultiplier: Record<GoodsType, number> = {
+  ordinaire: 1,
+  batterie: 1.35,
+  liquide: 1.25,
+  poudre: 1.2
 };
 
 export const destinations = Object.keys(destinationMultipliers);
 
-export function estimateQuote(
-  weightKg: number,
-  destination: string,
-  urgency: Urgency,
-  volumeM3?: number
-): QuoteResult {
+export function estimateQuote(opts: {
+  weightKg: number;
+  destination: string;
+  urgency: Urgency;
+  goods: GoodsType;
+  shippingMode: ShippingMode;
+  cbm?: number;
+  insurance?: boolean;
+  accompagnement?: boolean;
+}): QuoteResult {
+  const { weightKg, destination, urgency, goods, shippingMode } = opts;
   const cfg = urgencyConfig[urgency];
   const destMult = destinationMultipliers[destination] ?? 1.15;
-  const volumetric = volumeM3 ? Math.max(weightKg, volumeM3 * 167) : weightKg;
+  const goodsMult = goodsMultiplier[goods] ?? 1;
+  // Maritime is billed on volumetric weight (CBM); aérien on real weight.
+  const volumetric =
+    shippingMode === "Maritime" && opts.cbm
+      ? Math.max(weightKg, opts.cbm * 167)
+      : weightKg;
 
-  let pricePerKg = cfg.base * destMult;
+  let pricePerKg = cfg.base * destMult * goodsMult;
   if (volumetric >= 100) pricePerKg *= 0.92;
   if (volumetric >= 500) pricePerKg *= 0.9;
   if (volumetric >= 1000) pricePerKg *= 0.88;
 
   const handling = 35;
-  const price = Math.round(volumetric * pricePerKg + handling);
+  const freight = Math.round(volumetric * pricePerKg + handling);
+  const insuranceFee = opts.insurance
+    ? Math.round(weightKg * INSURANCE_USD_PER_KG)
+    : 0;
+  const accompagnementFee = opts.accompagnement ? ACCOMPAGNEMENT_USD : 0;
+  const price = freight + insuranceFee + accompagnementFee;
 
   const next =
     departures
-      .filter((d) => d.mode === cfg.mode)
+      .filter((d) => d.mode === shippingMode)
       .sort((a, b) => +new Date(a.date) - +new Date(b.date))[0] ?? departures[0];
 
   return {
     price,
+    freight,
+    insuranceFee,
+    accompagnementFee,
     pricePerKg: Math.round(pricePerKg * 10) / 10,
     delayDays: cfg.days,
-    delayLabel: `${cfg.days} jours environ`,
+    delayLabel: `${cfg.days} jours`,
     urgencyLabel: cfg.label,
+    shippingMode,
     nextDeparture: {
       date: next.date,
       reference: next.reference,

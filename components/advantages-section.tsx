@@ -102,9 +102,9 @@ export function AdvantagesSection() {
   return (
     <section
       ref={ref}
-      className="relative bg-soft lg:h-[420vh]"
+      className="relative bg-soft h-[320vh] lg:h-[420vh]"
     >
-      <div className="lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:items-center">
+      <div className="sticky top-0 flex min-h-screen items-center">
         <div className="container-tight w-full py-16 lg:py-20">
           {/* Headline */}
           <div className="flex flex-col items-center text-center">

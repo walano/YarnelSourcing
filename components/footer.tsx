@@ -23,7 +23,7 @@ const groups = [
   {
     title: "Entreprise",
     links: [
-      { href: "/contact", label: "À propos" },
+      { href: "/a-propos", label: "À propos" },
       { href: "/contact", label: "Conditions générales" },
       { href: "/contact", label: "Politique de confidentialité" },
       { href: "/contact", label: "Devenir partenaire" }

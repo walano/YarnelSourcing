@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/reveal";
+import { PageHeader } from "@/components/page-header";
 import { articles } from "@/lib/data";
 import { formatDateFR } from "@/lib/utils";
 
@@ -28,20 +29,15 @@ export default function BlogPage() {
 
   return (
     <div className="bg-white">
-      <section className="border-b border-navy/10 bg-navy text-white">
-        <div className="container-tight py-24 lg:py-28">
-          <p className="eyebrow-light">Ressources</p>
-          <h1 className="mt-4 max-w-3xl text-display-lg font-extrabold">
-            Apprendre à{" "}
-            <span className="text-sky">importer mieux</span>,
-            chaque semaine.
-          </h1>
-          <p className="mt-5 max-w-xl text-base text-white/75">
-            Guides terrain rédigés par nos agents en Chine et nos transitaires.
-            Des conseils concrets, des chiffres, zéro jargon.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        title={
+          <>
+            Apprendre à <span className="text-sky">importer mieux</span>, chaque
+            semaine.
+          </>
+        }
+        description="Guides terrain rédigés par nos agents en Chine et nos transitaires. Des conseils concrets, des chiffres, zéro jargon."
+      />
 
       <section className="container-tight py-16 lg:py-24">
         {/* Featured */}
@@ -127,13 +123,13 @@ export default function BlogPage() {
 
         {/* Newsletter */}
         <Reveal className="mt-16">
-          <div className="grid gap-6 rounded-2xl bg-electric p-8 text-white lg:grid-cols-[1.5fr_1fr] lg:items-center lg:p-12">
+          <div className="grid gap-10 rounded-2xl bg-electric px-8 py-12 text-white lg:grid-cols-[1.6fr_1fr] lg:items-center lg:px-14 lg:py-20">
             <div>
               <p className="eyebrow-light !text-white/70">Lettre mensuelle</p>
-              <h3 className="mt-3 text-display-md font-extrabold leading-tight">
+              <h3 className="mt-3 text-display-md font-extrabold leading-tight -tracking-wider">
                 Recevez nos analyses de marché et nos guides pratiques.
               </h3>
-              <p className="mt-3 max-w-lg text-sm text-white/85">
+              <p className="mt-3 max-w-lg text-sm text-white/85" style={{ lineHeight: '1.5' }}>
                 Tarifs Chine, alertes Incoterms, retours d'expérience clients.
                 Un seul email par mois, désinscription en un clic.
               </p>
@@ -143,11 +139,11 @@ export default function BlogPage() {
                 type="email"
                 required
                 placeholder="votre@email.com"
-                className="h-12 flex-1 rounded-xl border border-white/30 bg-white/10 px-4 text-sm text-white placeholder:text-white/60 outline-none focus:border-white"
+                className="h-12 rounded-full bg-white px-8 text-base"
               />
               <button
                 type="submit"
-                className="h-12 rounded-xl bg-white px-6 text-sm font-semibold text-electric transition-colors hover:bg-sky hover:text-navy"
+                className="h-12 rounded-full bg-navy px-8 text-base font-semibold text-white transition-colors hover:bg-white hover:text-navy"
               >
                 S'abonner
               </button>
