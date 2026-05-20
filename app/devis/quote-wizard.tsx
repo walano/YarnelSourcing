@@ -28,6 +28,7 @@ import {
   destinations,
   estimateQuote,
   goodsOptions,
+  INSURANCE_USD_PER_KG,
   type GoodsType,
   type QuoteResult,
   type ShippingMode,
@@ -95,6 +96,7 @@ export function QuoteWizard() {
 
 function DetailedFlow() {
   const { user, addQuote } = useStore();
+  const currency = user?.currency ?? "FCFA";
   const [step, setStep] = useState(0);
   const [goods, setGoods] = useState<GoodsType>("ordinaire");
   const [shipping, setShipping] = useState<ShippingMode>("Maritime");
@@ -307,7 +309,10 @@ function DetailedFlow() {
                 onChange={() => setInsurance((v) => !v)}
                 icon={ShieldCheck}
                 title="Assurance marchandise"
-                detail="4 000 FCFA par kilo · couverture totale en cas de perte"
+                detail={`${formatMoney(
+                  INSURANCE_USD_PER_KG,
+                  currency
+                )} par kilo · couverture totale en cas de perte`}
               />
               <OptionToggle
                 checked={accompagnement}
@@ -506,7 +511,7 @@ function PhotoFlow() {
               <CheckCircle2 className="h-8 w-8 text-electric" />
             </div>
             <h2 className="mt-5 text-2xl font-bold text-navy">
-              Demande envoyée 🎉
+              Demande envoyée
             </h2>
             <p className="mx-auto mt-2 max-w-md text-sm text-navy/65">
               Un agent Yarnel étudie votre photo et vos informations, puis vous

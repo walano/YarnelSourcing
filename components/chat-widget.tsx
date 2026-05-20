@@ -45,7 +45,7 @@ export function ChatWidget() {
   const [messages, setMessages] = useState<Msg[]>([
     {
       from: "bot",
-      text: "Bonjour 👋 Je suis l'assistant Yarnel. Sur quoi puis-je vous aider ?"
+      text: "Bonjour, je suis l'assistant Yarnel. Sur quoi puis-je vous aider ?"
     }
   ]);
   const [resolved, setResolved] = useState<boolean | null>(null);

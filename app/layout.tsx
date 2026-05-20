@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { ChatWidget } from "@/components/chat-widget";
-import { PageTransition } from "@/components/page-transition";
+import { AppShell } from "@/components/app-shell";
 import { StoreProvider } from "@/lib/store";
 
 const inter = Inter({
@@ -39,12 +36,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-white font-sans">
         <StoreProvider>
-          <Navbar />
-          <PageTransition>
-            <main className="min-h-screen">{children}</main>
-          </PageTransition>
-          <Footer />
-          <ChatWidget />
+          <AppShell>{children}</AppShell>
         </StoreProvider>
       </body>
     </html>

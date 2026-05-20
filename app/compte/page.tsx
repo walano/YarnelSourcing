@@ -53,7 +53,7 @@ function ClientDashboard() {
           <div>
             <p className="eyebrow">Espace client</p>
             <h1 className="mt-2 text-3xl font-extrabold text-navy">
-              Bonjour, {user!.name.split(" ")[0]} 👋
+              Bonjour, {user!.name.split(" ")[0]}
             </h1>
             <p className="mt-1 text-sm text-navy/60">
               Devise : {currency} · {myQuotes.length} devis · {myInvoices.length}{" "}

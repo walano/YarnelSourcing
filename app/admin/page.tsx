@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RoleGuard } from "@/components/role-guard";
 import { cn, formatDateFR } from "@/lib/utils";
-import { formatMoney } from "@/lib/currency";
+import { formatMoney, rates } from "@/lib/currency";
 import { useStore, type Product } from "@/lib/store";
 import type { Departure } from "@/lib/data";
 
@@ -149,7 +149,7 @@ function Demandes() {
               </>
             ) : (
               <>
-                <span className="font-medium">📷 Devis par photo : {q.photoName}</span>
+                <span className="font-medium">Devis par photo : {q.photoName}</span>
                 <span className="sm:col-span-2">« {q.description} »</span>
               </>
             )}
@@ -456,14 +456,20 @@ function CatalogueAdmin() {
                 onChange={(e) => setForm({ ...form, image: e.target.value })}
               />
             </Field>
-            <Field label="Prix (USD)">
+            <Field label="Prix (FCFA)">
               <Input
                 type="number"
-                value={form.priceUsd}
+                value={Math.round(form.priceUsd * rates.FCFA)}
                 onChange={(e) =>
-                  setForm({ ...form, priceUsd: Number(e.target.value) })
+                  setForm({
+                    ...form,
+                    priceUsd: Number(e.target.value) / rates.FCFA
+                  })
                 }
               />
+              <p className="mt-1.5 text-xs text-navy/50">
+                Saisi en FCFA, converti automatiquement dans la devise du client.
+              </p>
             </Field>
           </div>
           <div className="mt-4 flex gap-2">
@@ -494,7 +500,9 @@ function CatalogueAdmin() {
                 {p.category}
               </p>
               <p className="text-sm font-semibold text-navy">{p.name}</p>
-              <p className="text-sm font-bold text-navy/80">{p.priceUsd} $</p>
+              <p className="text-sm font-bold text-navy/80">
+                {formatMoney(p.priceUsd, "FCFA")}
+              </p>
               <div className="mt-auto flex gap-1 pt-2">
                 <IconBtn onClick={() => startEdit(p)}>
                   <Pencil className="h-4 w-4" />

@@ -10,7 +10,8 @@ import { cn } from "@/lib/utils";
 import { useStore, type Role } from "@/lib/store";
 import { currencies, type Currency } from "@/lib/currency";
 
-const demo = {
+// Identity "returned" by Google once the user authenticates.
+const googleAccount = {
   client: { name: "Awa Ndong", email: "awa.ndong@gmail.com" },
   admin: { name: "Admin Yarnel", email: "admin@yarnelsourcing.com" }
 };
@@ -19,14 +20,16 @@ export function LoginCard({ role }: { role: Role }) {
   const router = useRouter();
   const params = useSearchParams();
   const { login } = useStore();
-  const [name, setName] = useState(demo[role].name);
-  const [email, setEmail] = useState(demo[role].email);
+
+  const [step, setStep] = useState<"start" | "confirm">("start");
+  const [name, setName] = useState(googleAccount[role].name);
   const [currency, setCurrency] = useState<Currency>("FCFA");
 
   const isAdmin = role === "admin";
+  const email = googleAccount[role].email;
 
-  const submit = () => {
-    login({ name: name.trim() || demo[role].name, email, role, currency });
+  const finish = () => {
+    login({ name: name.trim() || googleAccount[role].name, email, role, currency });
     const next = params.get("next");
     router.push(next || (isAdmin ? "/admin" : "/compte"));
   };
@@ -38,67 +41,85 @@ export function LoginCard({ role }: { role: Role }) {
           <ShieldCheck className="h-3.5 w-3.5 text-sky" /> Espace administrateur
         </div>
       )}
-      <h1 className="text-2xl font-bold text-navy">
-        {isAdmin ? "Connexion admin" : "Bienvenue 👋"}
-      </h1>
-      <p className="mt-2 text-sm text-navy/60">
-        {isAdmin
-          ? "Réservé à l'équipe Yarnel : gérez les départs et répondez aux devis."
-          : "Connectez-vous pour obtenir vos devis et suivre vos factures."}
-      </p>
 
-      <div className="mt-7 space-y-5">
-        <div>
-          <Label htmlFor="name">Nom complet</Label>
-          <Input
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="mt-2"
-            placeholder="Votre nom"
-          />
-        </div>
-        <div>
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="mt-2"
-            placeholder="vous@email.com"
-          />
-        </div>
+      {step === "start" ? (
+        <>
+          <h1 className="text-2xl font-bold text-navy">
+            {isAdmin ? "Connexion admin" : "Connexion"}
+          </h1>
+          <p className="mt-2 text-sm text-navy/60">
+            {isAdmin
+              ? "Réservé à l'équipe Yarnel : gérez les départs et répondez aux devis."
+              : "Accédez à vos devis et suivez vos factures."}
+          </p>
 
-        <div>
-          <Label>Devise</Label>
-          <div className="mt-2 grid grid-cols-3 gap-2">
-            {currencies.map((c) => (
-              <button
-                key={c.value}
-                type="button"
-                onClick={() => setCurrency(c.value)}
-                className={cn(
-                  "rounded-xl border px-3 py-2.5 text-sm font-semibold transition-all",
-                  currency === c.value
-                    ? "border-electric bg-electric/5 text-electric"
-                    : "border-navy/15 text-navy/70 hover:border-navy/40"
-                )}
-              >
-                {c.value === "FCFA" ? "FCFA" : `${c.label} ${c.symbol}`}
-              </button>
-            ))}
+          <Button
+            onClick={() => setStep("confirm")}
+            size="lg"
+            className="mt-8 w-full"
+            variant="white"
+          >
+            <GoogleGlyph />
+            Continuer avec Google
+          </Button>
+        </>
+      ) : (
+        <>
+          <h1 className="text-2xl font-bold text-navy">Confirmez votre compte</h1>
+          <p className="mt-2 text-sm text-navy/60">
+            Vérifiez les informations de votre compte Google et choisissez votre
+            devise.
+          </p>
+
+          <div className="mt-6 flex items-center gap-3 rounded-2xl bg-soft p-3">
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-navy text-sm font-semibold text-white">
+              {name.charAt(0).toUpperCase()}
+            </span>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold text-navy">{name}</p>
+              <p className="truncate text-xs text-navy/55">{email}</p>
+            </div>
           </div>
-        </div>
 
-        <Button onClick={submit} size="lg" className="w-full" variant="white">
-          <GoogleGlyph />
-          Continuer avec Google
-        </Button>
-        <p className="text-center text-xs text-navy/45">
-          Démo — aucune authentification réelle, données stockées localement.
-        </p>
-      </div>
+          <div className="mt-5 space-y-5">
+            <div>
+              <Label htmlFor="name">Nom</Label>
+              <Input
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="mt-2"
+                placeholder="Votre nom"
+              />
+            </div>
+
+            <div>
+              <Label>Devise</Label>
+              <div className="mt-2 grid grid-cols-3 gap-2">
+                {currencies.map((c) => (
+                  <button
+                    key={c.value}
+                    type="button"
+                    onClick={() => setCurrency(c.value)}
+                    className={cn(
+                      "rounded-xl border px-3 py-2.5 text-sm font-semibold transition-all",
+                      currency === c.value
+                        ? "border-electric bg-electric/5 text-electric"
+                        : "border-navy/15 text-navy/70 hover:border-navy/40"
+                    )}
+                  >
+                    {c.value === "FCFA" ? "FCFA" : `${c.label} ${c.symbol}`}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <Button onClick={finish} size="lg" className="w-full">
+              Confirmer et continuer
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
