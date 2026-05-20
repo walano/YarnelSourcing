@@ -90,7 +90,7 @@ export function Navbar() {
           "mx-auto flex max-w-[1280px] items-center justify-between rounded-full px-4 py-3 transition-all duration-300 lg:px-6 lg:py-3.5",
           solidBar
             ? "bg-white/95 shadow-[0_8px_32px_-12px_rgba(4,9,47,0.18)] backdrop-blur"
-            : "bg-transparent"
+            : "bg-navy/50 backdrop-blur"
         )}
       >
         <Link href="/" className="flex items-center gap-2">

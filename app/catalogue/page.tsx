@@ -218,7 +218,7 @@ export default function CataloguePage() {
               {cats.length === 1 && ` · ${cats[0]}`}
             </p>
 
-            <div className="mt-4 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-4 grid grid-cols-2 gap-4 sm:gap-5 xl:grid-cols-3">
               {results.map((p) => (
                 <article
                   key={p.id}
